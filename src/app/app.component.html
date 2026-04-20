@@ -1,0 +1,65 @@
+<div class="dashboard-container">
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="logo-section">
+      <h1>Student Portal | <small>Mess Billing</small></h1>
+    </div>
+  </header>
+
+  <main class="content">
+    <!-- Search Card -->
+    <div class="search-card">
+      <h3>Quick Search</h3>
+      <p>Enter a student name to retrieve monthly billing history.</p>
+      <div class="search-box">
+        <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="search()" placeholder="e.g. Hari Athithya">
+        <button (click)="search()">
+        Fetch Records
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="table-container" *ngIf="results.length > 0">
+      <div class="table-header">
+        <h4>Billing Summary for: {{ results[0].name }}</h4>
+      </div>
+<table>
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Deposit</th>
+      <th>Opening Balance</th>
+      <th>Closing Balance</th>
+      <th>Days</th>
+      <th>Mess Fees</th>
+      <th>Extra</th>
+      <th>Guest</th>
+      <th>Breakage</th>
+      <th>Medical</th>
+      <th>Bus</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bill of results">
+      <td><strong>{{ bill.month }}</strong></td>
+      <td>{{ bill.deposit }}</td>
+      <td>{{ bill.opening | number:'1.2-2' }}</td>
+      <td>{{ bill.closing | number:'1.2-2' }}</td>
+      <td>{{ bill.days }}</td>
+      <td>{{ bill.fees | number:'1.2-2' }}</td>
+      <td>{{ bill.extra | number:'1.2-2' }}</td>
+      <td>{{ bill.guest | number:'1.2-2' }}</td>
+      <td>{{ bill.breakage | number:'1.2-2' }}</td>
+      <td>{{ bill.medical | number:'1.2-2' }}</td>
+      <td>{{ bill.bus | number:'1.2-2' }}</td>
+      <td class="total-cell"><strong>{{ bill.total | number:'1.2-2' }}</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+
+  </main>
+</div>
